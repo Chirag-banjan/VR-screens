@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - VR Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- A-Frame for VR -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- html2canvas for capturing sections -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <!-- Main Dashboard View -->
+    <div id="dashboard-view">
+        <header class="dashboard-header">
+            <h1>Analytics Dashboard</h1>
+            <p class="subtitle">Click "View in VR" on any section to experience it in virtual reality</p>
+            <button class="view-all-vr-button" onclick="openAllInVR()">
+                <span class="vr-icon-large">🥽</span>
+                <span class="button-text">
+                    <span class="button-title">Enter VR Command Center</span>
+                    <span class="button-subtitle">View all dashboards in immersive mode</span>
+                </span>
+            </button>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- KPI Cards Section -->
+            <section class="dashboard-section kpi-section" id="section-kpis">
+                <div class="section-header">
+                    <h2>Key Performance Indicators</h2>
+                    <button class="vr-button" onclick="openInVR('section-kpis')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-value" id="kpi-revenue">$124,500</div>
+                        <div class="kpi-label">Total Revenue</div>
+                        <div class="kpi-change positive">+12.5%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" id="kpi-users">8,420</div>
+                        <div class="kpi-label">Active Users</div>
+                        <div class="kpi-change positive">+8.3%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" id="kpi-orders">1,250</div>
+                        <div class="kpi-label">Orders</div>
+                        <div class="kpi-change negative">-2.1%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" id="kpi-conversion">3.2%</div>
+                        <div class="kpi-label">Conversion Rate</div>
+                        <div class="kpi-change positive">+0.5%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sales Chart Section -->
+            <section class="dashboard-section chart-section" id="section-sales">
+                <div class="section-header">
+                    <h2>Sales Overview</h2>
+                    <button class="vr-button" onclick="openInVR('section-sales')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Traffic Chart Section -->
+            <section class="dashboard-section chart-section" id="section-traffic">
+                <div class="section-header">
+                    <h2>Website Traffic</h2>
+                    <button class="vr-button" onclick="openInVR('section-traffic')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Pie Chart Section -->
+            <section class="dashboard-section chart-section" id="section-categories">
+                <div class="section-header">
+                    <h2>Sales by Category</h2>
+                    <button class="vr-button" onclick="openInVR('section-categories')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="chart-container pie-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Progress Metrics Section -->
+            <section class="dashboard-section metrics-section" id="section-progress">
+                <div class="section-header">
+                    <h2>Goals Progress</h2>
+                    <button class="vr-button" onclick="openInVR('section-progress')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="progress-list">
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Monthly Sales Target</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%; background: #4CAF50;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>New Customer Acquisition</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%; background: #2196F3;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Customer Satisfaction</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 92%; background: #9C27B0;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>Support Tickets Resolved</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 88%; background: #FF9800;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity Section -->
+            <section class="dashboard-section activity-section" id="section-activity">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <button class="vr-button" onclick="openInVR('section-activity')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #4CAF50;">$</div>
+                        <div class="activity-content">
+                            <div class="activity-title">New sale completed</div>
+                            <div class="activity-time">2 minutes ago</div>
+                        </div>
+                        <div class="activity-amount">+$450</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #2196F3;">👤</div>
+                        <div class="activity-content">
+                            <div class="activity-title">New user registered</div>
+                            <div class="activity-time">15 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #FF9800;">📦</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Order #1234 shipped</div>
+                            <div class="activity-time">1 hour ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #9C27B0;">⭐</div>
+                        <div class="activity-content">
+                            <div class="activity-title">5-star review received</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Clock Section -->
+            <section class="dashboard-section clock-section" id="section-clock">
+                <div class="section-header">
+                    <h2>Live Time</h2>
+                    <button class="vr-button" onclick="openInVR('section-clock')">
+                        <span class="vr-icon">🥽</span> View in VR
+                    </button>
+                </div>
+                <div class="clock-container">
+                    <div class="clock-display">
+                        <div class="clock-time" id="live-time">00:00:00</div>
+                        <div class="clock-date" id="live-date">Loading...</div>
+                    </div>
+                    <div class="clock-details">
+                        <div class="clock-detail-item">
+                            <span class="detail-label">Timezone</span>
+                            <span class="detail-value" id="timezone">--</span>
+                        </div>
+                        <div class="clock-detail-item">
+                            <span class="detail-label">Day of Year</span>
+                            <span class="detail-value" id="day-of-year">--</span>
+                        </div>
+                        <div class="clock-detail-item">
+                            <span class="detail-label">Week</span>
+                            <span class="detail-value" id="week-number">--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- VR Scene (Initially Hidden) -->
+    <div id="vr-view" class="hidden">
+        <div class="vr-controls">
+            <div class="vr-buttons">
+                <button class="exit-vr-button" onclick="exitVR()">← Exit VR View</button>
+                <button class="reset-camera-button" onclick="vrCameraControls.reset()">Reset Camera</button>
+            </div>
+            <div class="vr-instructions">
+                <p><strong>Look:</strong> Click + Drag | <strong>Move:</strong> WASD</p>
+                <p><strong>Zoom:</strong> Scroll / +/- keys | <strong>Pan:</strong> Shift+Drag</p>
+                <p><strong>Reset:</strong> R key | <strong>Exit:</strong> ESC</p>
+            </div>
+        </div>
+        <a-scene id="vr-scene" embedded vr-mode-ui="enabled: true">
+            <!-- Camera with look controls for simulator -->
+            <a-entity id="rig" position="0 1.6 2.5">
+                <a-camera
+                    look-controls="pointerLockEnabled: false"
+                    wasd-controls="acceleration: 30">
+                </a-camera>
+            </a-entity>
+
+            <!-- Environment -->
+            <a-sky color="#1a1a2e"></a-sky>
+            <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#16213e"></a-plane>
+
+            <!-- Grid for spatial reference -->
+            <a-entity id="grid">
+                <a-plane position="0 0.01 0" rotation="-90 0 0" width="20" height="20"
+                         material="src: #gridTexture; repeat: 20 20; transparent: true; opacity: 0.3"></a-plane>
+            </a-entity>
+
+            <!-- Dashboard Panel Placeholder -->
+            <a-entity id="vr-panel-container" position="0 2.0 -1">
+                <!-- Panel will be dynamically created here -->
+            </a-entity>
+
+            <!-- Ambient lighting -->
+            <a-light type="ambient" color="#ffffff" intensity="0.5"></a-light>
+            <a-light type="directional" color="#ffffff" intensity="0.5" position="0 5 5"></a-light>
+
+            <!-- Assets -->
+            <a-assets>
+                <canvas id="gridTexture" crossorigin="anonymous"></canvas>
+                <canvas id="dashboardTexture" crossorigin="anonymous"></canvas>
+            </a-assets>
+        </a-scene>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">Preparing VR Experience...</p>
+            <p class="loading-subtext">Capturing dashboard panels</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

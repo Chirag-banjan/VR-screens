@@ -1,0 +1,633 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* Dashboard View */
+#dashboard-view {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #00d4ff, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.dashboard-header .subtitle {
+    color: #a0aec0;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* View All in VR Button */
+.view-all-vr-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #7c3aed 0%, #00d4ff 50%, #7c3aed 100%);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.4), 0 0 60px rgba(0, 212, 255, 0.2);
+    animation: gradientShift 3s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.view-all-vr-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.view-all-vr-button:hover::before {
+    left: 100%;
+}
+
+.view-all-vr-button:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124, 58, 237, 0.5), 0 0 80px rgba(0, 212, 255, 0.3);
+}
+
+.view-all-vr-button:active {
+    transform: scale(0.98);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.vr-icon-large {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+}
+
+.button-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.button-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.button-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* VR Button */
+.vr-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #7c3aed 0%, #00d4ff 100%);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.vr-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
+}
+
+.vr-button:active {
+    transform: scale(0.98);
+}
+
+.vr-icon {
+    font-size: 1.2rem;
+}
+
+/* KPI Section */
+.kpi-section {
+    grid-column: span 2;
+}
+
+@media (max-width: 1024px) {
+    .kpi-section {
+        grid-column: span 1;
+    }
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.kpi-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kpi-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 8px;
+}
+
+.kpi-label {
+    font-size: 0.875rem;
+    color: #a0aec0;
+    margin-bottom: 8px;
+}
+
+.kpi-change {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.kpi-change.positive {
+    color: #4CAF50;
+}
+
+.kpi-change.negative {
+    color: #f44336;
+}
+
+/* Chart Sections */
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.pie-container {
+    height: 280px;
+}
+
+/* Progress Section */
+.progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.progress-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #e2e8f0;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* Activity Section */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    margin-top: 2px;
+}
+
+.activity-amount {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+/* Clock Section */
+.clock-section {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+}
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.clock-display {
+    text-align: center;
+}
+
+.clock-time {
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(90deg, #00d4ff, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    animation: clockPulse 1s ease-in-out infinite;
+}
+
+@keyframes clockPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+}
+
+.clock-date {
+    font-size: 1.1rem;
+    color: #a0aec0;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.clock-details {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.clock-detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00d4ff;
+}
+
+/* VR View */
+#vr-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+#vr-view.hidden {
+    visibility: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#vr-view:not(.hidden) {
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1000;
+}
+
+.vr-controls {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+}
+
+.vr-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.exit-vr-button,
+.reset-camera-button {
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00d4ff;
+    border-radius: 25px;
+    color: #00d4ff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.exit-vr-button:hover,
+.reset-camera-button:hover {
+    background: #00d4ff;
+    color: #1a1a2e;
+}
+
+.reset-camera-button {
+    border-color: #7c3aed;
+    color: #7c3aed;
+}
+
+.reset-camera-button:hover {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+.vr-instructions {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 12px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vr-instructions p {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    margin-bottom: 4px;
+}
+
+.vr-instructions p:last-child {
+    margin-bottom: 0;
+}
+
+.vr-instructions strong {
+    color: #00d4ff;
+}
+
+/* A-Frame Scene */
+#vr-scene {
+    width: 100%;
+    height: 100%;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(26, 26, 46, 0.95) 0%, rgba(10, 10, 26, 0.98) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+#loading-overlay.hidden {
+    display: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #00d4ff;
+    border-right-color: #7c3aed;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 24px;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-content p {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.loading-content .loading-subtext {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .view-all-vr-button {
+        padding: 14px 24px;
+        gap: 12px;
+    }
+
+    .vr-icon-large {
+        font-size: 1.5rem;
+    }
+
+    .button-title {
+        font-size: 1rem;
+    }
+
+    .button-subtitle {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .view-all-vr-button {
+        padding: 12px 20px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .vr-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vr-controls {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+
+    .vr-buttons {
+        flex-direction: column;
+    }
+
+    .exit-vr-button,
+    .reset-camera-button {
+        width: 100%;
+        text-align: center;
+    }
+}
